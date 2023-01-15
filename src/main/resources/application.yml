@@ -1,8 +1,29 @@
-server:
-  port: 8080
 spring:
   thymeleaf:
-    cache: false
     check-template-location: true
-    prefix: classpath:templates/
+    cache: false
+    prefix: classpath:/templates/
     suffix: .html
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:~/test
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  security:
+    user:
+      name: user
+      password: 1234
