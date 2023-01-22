@@ -1,10 +1,8 @@
-package com.example.spj.config;
+package com.example.spj.entity.user;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-
+import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +17,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "spj_user")
-public class UserDetail implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +29,10 @@ public class UserDetail implements UserDetails {
 
     private boolean enabled;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private Set<Authority> authorities;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
     @Override
     public String getUsername() {
         return email;

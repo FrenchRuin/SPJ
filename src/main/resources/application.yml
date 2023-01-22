@@ -25,5 +25,5 @@ spring:
 
   security:
     user:
-      name: user
+      name: user@test.com
       password: 1234

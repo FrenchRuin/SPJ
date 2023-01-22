@@ -1,9 +1,10 @@
 package com.example.spj.controller;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MainController {
@@ -18,10 +19,10 @@ public class MainController {
         return "loginForm";
     }
 
-//    @PostMapping("/logout")
-//    public String logout(){
-//        return "logout";
-//    }
-
+    @GetMapping("/auth")
+    @ResponseBody
+    public Authentication auth(){
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
 
 }
