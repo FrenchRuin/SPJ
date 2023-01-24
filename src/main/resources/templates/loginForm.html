@@ -9,17 +9,17 @@
     <link rel="stylesheet" th:href="@{css/loginSign.css}">
 </head>
 <body>
-<main class="form-signin w-100 m-auto">
+<main class="form-signin w-100 m-auto" >
     <form method="post" th:action="@{/login}">
         <img class="mb-4" th:src="@{img/test.png}" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Login</h1>
 
-        <div class="form-floating">
-            <input type="text" class="form-control" id="username" name="username" placeholder="Id">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control rounded-3" id="username" name="username" placeholder="Id" required>
             <label for="username">Id</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <input type="password" class="form-control rounded-3" id="password" name="password" placeholder="Password" required>
             <label for="password">Password</label>
         </div>
 
@@ -30,11 +30,10 @@
         </div>
         <div class="d-flex">
             <button class="w-50 btn btn-primary" type="submit">Sign in</button>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#modalSignin">Sign Up</a>
+            <button  class="w-50 btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalSignin">Sign Up</button>
         </div>
-        <p class="mt-5 mb-3 text-muted">&copy; DEV_LEE</p>
+        <p class="mt-5 mb-3 text-muted">&copy; Dev_Lee</p>
     </form>
-
 </main>
 <th:block th:replace="signUp :: signUpModal"></th:block>
 </body>

@@ -1,13 +1,15 @@
 package com.example.spj.config;
 
+import com.example.spj.entity.user.User;
 import com.example.spj.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -18,10 +20,8 @@ public class CustomUserDetailsService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        log.info("username >>>>> {}" , username);
-        return User.builder()
-                .username(username)
-                .build();
+        return userRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException(username)
+        );
     }
 }
