@@ -19,6 +19,11 @@ public class MainController {
         return "loginForm";
     }
 
+    @GetMapping("/signUp")
+    public String signUp() {
+        return "signUp";
+    }
+
     @GetMapping("/auth")
     @ResponseBody
     public Authentication auth(){

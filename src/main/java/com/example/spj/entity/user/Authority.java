@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class Authority implements GrantedAuthority {
 
     @Id
-    private Long id;
+    private Long userId;
 
     private String authority;
 
