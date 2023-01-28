@@ -18,8 +18,8 @@ import javax.persistence.Table;
 @Builder
 @Entity
 @Table(name = "spj_authority")
-@IdClass(Authority.class)
-public class Authority implements GrantedAuthority {
+@IdClass(UserAuthority.class)
+public class UserAuthority implements GrantedAuthority {
 
     @Id
     private Long userId;

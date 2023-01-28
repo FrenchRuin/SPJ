@@ -3,7 +3,6 @@ package com.example.spj.entity.user;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -33,7 +32,7 @@ public class User implements UserDetails {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(foreignKey = @ForeignKey(name = "userId"))
-    private Set<Authority> authorities;
+    private Set<UserAuthority> authorities;
 
     @Column(updatable = false)
     private LocalDateTime created;

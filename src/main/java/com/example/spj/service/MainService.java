@@ -1,10 +1,11 @@
 package com.example.spj.service;
 
-import com.example.spj.entity.user.Authority;
+import com.example.spj.entity.user.UserAuthority;
 import com.example.spj.entity.user.User;
 import com.example.spj.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,20 +18,28 @@ import java.util.HashSet;
 public class MainService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+
+    private PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    };
+
     public void signUpProcess(User user) {
+
       log.info("회원가입 요청 >>> {}", user.getUsername());
-        Authority newRole = new Authority(1L, "ROLE_USER");
-        HashSet<Authority> authorities = new HashSet<>();
-        authorities.add(newRole);
         User spjUser = User.builder()
                 .username(user.getUsername())
                 .created(LocalDateTime.now())
                 .updated(LocalDateTime.now())
-                .password(passwordEncoder.encode(user.getPassword()))
-                .authorities(authorities)
+                .password(passwordEncoder().encode(user.getPassword()))
+                .enabled(true)
                 .build();
+         User savedUser =  userRepository.save(spjUser);
 
-        userRepository.save(spjUser);
+        UserAuthority newRole = new UserAuthority(savedUser.getUserId(), "ROLE_USER");
+        HashSet<UserAuthority> authorities = new HashSet<>();
+        authorities.add(newRole);
+        savedUser.setAuthorities(authorities);
+
+        userRepository.save(savedUser);
     }
 }
