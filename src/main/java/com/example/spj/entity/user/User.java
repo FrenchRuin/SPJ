@@ -1,8 +1,10 @@
 package com.example.spj.entity.user;
 
+import com.example.spj.entity.board.Board;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -33,6 +35,9 @@ public class User implements UserDetails {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(foreignKey = @ForeignKey(name = "userId"))
     private Set<UserAuthority> authorities;
+
+    @OneToMany(mappedBy = "user")
+    private List<Board> boards;
 
     @Column(updatable = false)
     private LocalDateTime created;

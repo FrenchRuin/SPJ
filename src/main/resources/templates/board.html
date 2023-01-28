@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="fragment/config :: configFragment"></th:block>
+</head>
+<body>
+<th:block th:replace="fragment/header :: headerFragment"></th:block>
+<main>
+    <div class="container py-2">
+        <form method="post" th:action="@{/saveBoard}">
+            <div class="input-group mb-3">
+                <span class="input-group-text">@</span>
+                <input type="text" class="form-control" id="id" name="id" placeholder="Username" aria-label="Username"
+                       aria-describedby="basic-addon1" >
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">@</span>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Username" aria-label="Username"
+                       aria-describedby="basic-addon1" th:value="${board.title}">
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">With textarea</span>
+                <textarea class="form-control" aria-label="With textarea" id="contents" name="contents" th:value="${board.contents}"></textarea>
+            </div>
+            <button class="btn btn-success btn-lg" type="submit">등록</button>
+        </form>
+    </div>
+</main>
+<th:block th:replace="fragment/footer :: footerFragment"></th:block>
+</body>
+</html>
