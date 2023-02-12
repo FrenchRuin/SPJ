@@ -10,14 +10,14 @@
 <main>
     <div class="container py-2">
         <form method="post" th:action="@{/saveBoard}">
-            <div class="input-group mb-3">
-                <span class="input-group-text">@</span>
-                <input type="text" class="form-control" id="id" name="id" placeholder="Username" aria-label="Username"
-                       aria-describedby="basic-addon1" >
-            </div>
+<!--            <div class="input-group mb-3">-->
+<!--                <span class="input-group-text">@</span>-->
+<!--                <input type="text" class="form-control" id="id" name="id" placeholder="Username" aria-label="Username"-->
+<!--                       aria-describedby="basic-addon1" th:value="${board?.user.username}">-->
+<!--            </div>-->
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">@</span>
-                <input type="text" class="form-control" id="title" name="title" placeholder="Username" aria-label="Username"
+                <input type="text" class="form-control" id="title" name="title" placeholder="title" aria-label="title"
                        aria-describedby="basic-addon1" th:value="${board.title}">
             </div>
             <div class="input-group">

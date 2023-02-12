@@ -33,15 +33,14 @@ public class MainController {
 
     @GetMapping("/board")
     public String board(Model model, Board board) {
-        model.addAttribute("board", board);
+        model.addAttribute("board", new Board());
         return "board";
     }
 
     @PostMapping("/saveBoard")
-    public String saveBoard(Model model, Board board , Authentication authentication) {
+    public String saveBoard(Model model, Board board, Authentication authentication) {
         model.addAttribute("board", board);
-        log.info("board >>>> {}", board);
-        log.info("user >>>> {}" , authentication);
+        log.info("user >>>> {}", authentication.getPrincipal().toString());
         return "redirect:/board";
     }
 }

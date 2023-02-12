@@ -3,6 +3,7 @@ package com.example.spj.entity.board;
 
 import com.example.spj.entity.user.User;
 import com.example.spj.entity.user.UserAuthority;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long board_id;
 
     private String title;
 
@@ -29,12 +30,11 @@ public class Board {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @Column(updatable = false)
     private LocalDateTime created;
 
     private LocalDateTime updated;
-
-
 }
