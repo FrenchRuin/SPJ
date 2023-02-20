@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @Slf4j
 public class MainController {
+
 
     private final MainService mainService;
 
@@ -34,13 +36,19 @@ public class MainController {
     @GetMapping("/board")
     public String board(Model model, Board board) {
         model.addAttribute("board", new Board());
-        return "board";
+        return "board/board";
     }
 
-    @PostMapping("/saveBoard")
-    public String saveBoard(Model model, Board board, Authentication authentication) {
-        model.addAttribute("board", board);
-        log.info("user >>>> {}", authentication.getPrincipal().toString());
-        return "redirect:/board";
+    @GetMapping("/boardDetail")
+    public String boardDetail() {
+        return "board/boardDetail";
     }
+
+//    @GetMapping("/saveBoard")
+//    public String saveBoard(Model model, Board board) {
+//        model.addAttribute("board", board);
+////        log.info("user >>>> {}", SecurityContextHolder.getContext().getAuthentication());
+//        mainService.saveBoard(board, new User());
+//        return "redirect:/board";
+//    }
 }

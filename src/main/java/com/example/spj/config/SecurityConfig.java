@@ -1,6 +1,7 @@
 package com.example.spj.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,10 +14,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final UserService userService;
+
+    public SecurityConfig(UserService userService) {
+        this.userService = userService;
+    }
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -37,14 +41,12 @@ public class SecurityConfig {
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
                 .and()
                 .authenticationManager(authenticationManager)
-//                .addFilterAt(new CustomAuthenticationFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
     @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations())
-                .antMatchers("/templates/**");
+    public WebSecurityCustomizer webSecurityCustomizer(){
+        return web -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
 }

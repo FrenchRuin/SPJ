@@ -24,7 +24,10 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testAnnotationProcessor "org.projectlombok:lombok:1.18.20"
+    testCompileOnly "org.projectlombok:lombok:1.18.20"
 }
 
 tasks.named('test') {
