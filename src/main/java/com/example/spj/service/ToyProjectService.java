@@ -9,26 +9,26 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
-public class MainService {
+@RequiredArgsConstructor
+public class ToyProjectService {
 
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
 
-    public Board saveBoard(Board board, User user) {
-        log.info("user >> {}", user);
-        log.info("board >> {}", user);
-
-        board.setUser(user);
-        board.setCreated(LocalDateTime.now());
-        board.setUpdated(LocalDateTime.now());
-
-        return boardRepository.save(board);
+    public List<Board> findAllBoard(){
+        return boardRepository.findAll();
     }
 
-
-
+    public void saveBoard(Board board, User user) {
+        userRepository.findByUsername(user.getUsername()).ifPresent(x->{
+            board.setCreated(LocalDateTime.now());
+            board.setUser(x);
+        });
+        boardRepository.save(board);
+    }
 }

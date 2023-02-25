@@ -8,8 +8,8 @@
 <header class="mb-4">
     <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <a th:href="@{/}"  class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                <span> Main</span>
+            <a th:if="${prevPage  != '/'}" th:href="${prevPage}" class="btn btn-info d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                <span>Prev</span>
             </a>
             <div class="spinner-border" role="status">
                 <span class="visually-hidden">임시</span>
