@@ -32,8 +32,8 @@ public class SecurityConfig {
 
         return http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/login").permitAll().anyRequest().authenticated().and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/", false).failureUrl("/login")
+                .authorizeRequests().antMatchers("/login" , "/loginError").permitAll().anyRequest().authenticated().and()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/", false).failureUrl("/loginError")
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
                 .and()
                 .authenticationManager(authenticationManager)

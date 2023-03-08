@@ -31,4 +31,8 @@ public class ToyProjectService {
         });
         boardRepository.save(board);
     }
+
+    public Optional<Board> findBoard(Long boardId) {
+        return boardRepository.findById(boardId);
+    }
 }

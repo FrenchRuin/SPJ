@@ -15,12 +15,12 @@
     </div>
     <div class="row g-5">
         <div class="col-md-8">
-            <h4 class="text-muted">Visited List</h4>
+            <h4 class="text-muted col-md-8">Visited List</h4>
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">NickName</th>
+                    <th scope="col">UserName</th>
                     <th scope="col">Title</th>
                     <th scope="col">Contents</th>
                 </tr>
@@ -29,7 +29,7 @@
                 <tr th:each="board : ${boardList}">
                     <th th:text="${board.board_id}" scope="row">3</th>
                     <td th:text="${board.user.username}"></td>
-                    <td th:text="${board.title}"></td>
+                    <td><a th:href="@{/}" th:onclick="|javascript:getBoardData('${board.board_id}')|" data-bs-toggle="modal" data-bs-target="#boardModal" th:text="${board.title}"></a></td>
                     <td th:text="${board.contents}" colspan="2"></td>
                 </tr>
                 </tbody>
@@ -66,5 +66,29 @@
     </div>
 </main>
 <th:block th:replace="fragment/footer :: footerFragment"></th:block>
+<th:block th:replace="modal/boardModal :: boardModal"></th:block>
 </body>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function getBoardData(boardId) {
+
+        let board = {
+            "board_id" : boardId
+        };
+
+        $.ajax({
+            url : "/toy/findBoard",
+            data : board,
+            type : "GET",
+            success : (data) =>{
+                console.log(data);
+                $("#boardData").empty();
+                $("#boardData").append("<p>"+ data.title +"</p>");
+                $("#boardData").append("<p>"+ data.contents +"</p>");
+            }
+        })
+    }
+    /*]]>*/
+</script>
 </html>

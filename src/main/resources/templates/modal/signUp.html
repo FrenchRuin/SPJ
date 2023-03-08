@@ -8,7 +8,7 @@
     <th:block th:replace="fragment/config :: configFragment"></th:block>
 </head>
 <body th:fragment="signUpModal">
-<div class="modal fade modal-signin position-absolute bg-secondary py-5" data-bs-backdrop="false" tabindex="-1" role="dialog" id="modalSignin">
+<div class="modal fade " data-bs-backdrop="true"  tabindex="-1" aria-hidden="true" id="modalSignin">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-4 shadow">
             <div class="modal-header p-5 pb-4 border-bottom-0">
@@ -33,6 +33,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,6 +33,12 @@ public class ToyProjectController {
         model.addAttribute("prevPage", "/toy");
         model.addAttribute("boardList", toyProjectService.findAllBoard());
         return "toy/board";
+    }
+
+    @GetMapping("/toy/findBoard")
+    @ResponseBody
+    public Optional<Board> findBoard(Model model, Board board){
+        return toyProjectService.findBoard(board.getBoard_id());
     }
 
     @PostMapping("/toy/saveBoard")

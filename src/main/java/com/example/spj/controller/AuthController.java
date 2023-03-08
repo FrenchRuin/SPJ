@@ -20,7 +20,14 @@ public class AuthController {
     private final UserService userService;
 
     @GetMapping("/login")
-    public String login(){
+    public String login(Model model){
+        model.addAttribute("error",false);
+        return "login";
+    }
+
+    @GetMapping("loginError")
+    public String loginError(Model model) {
+        model.addAttribute("error", true);
         return "login";
     }
 
