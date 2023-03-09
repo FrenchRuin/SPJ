@@ -24,12 +24,14 @@ public class ToyProjectService {
         return boardRepository.findAll();
     }
 
-    public void saveBoard(Board board, User user) {
-        userRepository.findByUsername(user.getUsername()).ifPresent(x->{
+    public User saveBoard(Board board, User user) {
+        User saveUser = userRepository.findByUsername(user.getUsername()).orElse(null);
+        if (saveUser != null) {
             board.setCreated(LocalDateTime.now());
-            board.setUser(x);
-        });
-        boardRepository.save(board);
+            board.setUser(saveUser);
+            boardRepository.save(board);
+        }
+        return saveUser;
     }
 
     public Optional<Board> findBoard(Long boardId) {

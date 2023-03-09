@@ -36,6 +36,12 @@ public class SecurityConfig {
                 .formLogin().loginPage("/login").defaultSuccessUrl("/", false).failureUrl("/loginError")
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
                 .and()
+                .rememberMe()
+                .rememberMeParameter("remember-me")
+                .tokenValiditySeconds(3600)
+                .alwaysRemember(false)
+                .userDetailsService(userService)
+                .and()
                 .authenticationManager(authenticationManager)
                 .build();
     }
