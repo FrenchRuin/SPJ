@@ -35,4 +35,8 @@ public class ToyProjectService {
     public Optional<Board> findBoard(Long boardId) {
         return boardRepository.findById(boardId);
     }
+
+    public void deleteBoard(Board board) {
+        boardRepository.deleteById(board.getBoard_id());
+    }
 }

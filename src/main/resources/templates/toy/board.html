@@ -65,15 +65,50 @@
         </div>
     </div>
 </main>
+<div class="modal fade " data-bs-backdrop="true"  tabindex="-1" aria-hidden="true" id="boardModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-2">방명록</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-5 pt-0" id="boardData">
+                <hr class="my-4">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p> 삭제하시겠습니까? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" th:onclick="|javascript:deleteBoardData()|">Yes</button>
+                <button type="button" class="btn btn-secondary"  data-bs-toggle="modal" data-bs-target="#boardModal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
 <th:block th:replace="fragment/footer :: footerFragment"></th:block>
-<th:block th:replace="modal/boardModal :: boardModal"></th:block>
 </body>
 
 <script th:inline="javascript">
     /*<![CDATA[*/
+
+    let board = null;
+
     function getBoardData(boardId) {
 
-        let board = {
+        board = {
             "board_id" : boardId
         };
 
@@ -86,9 +121,22 @@
                 $("#boardData").empty();
                 $("#boardData").append("<p>"+ data.title +"</p>");
                 $("#boardData").append("<p>"+ data.contents +"</p>");
+                $("#boardData").append("<input type='hidden' value='"+ data.board_id +"' id='boardId'>");
             }
         })
     }
+
+    function deleteBoardData() {
+        $.ajax({
+            url : "/toy/deleteBoard",
+            data : board,
+            type : "GET",
+            success : () =>{
+                window.location.reload();
+            }
+        })
+    }
+
     /*]]>*/
 </script>
 </html>
