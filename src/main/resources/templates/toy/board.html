@@ -56,7 +56,7 @@
                     </div>
                     <button class="w-100 mb-2 btn rounded-3 btn-info" type="submit">Apply</button>
                 </form>
-                <div class="alert alert-warning" role="alert" th:if="${!wrongUser}">
+                <div class="alert alert-warning" role="alert" th:if="${wrongUser}">
                     존재하지않는 USER 입니다.
                 </div>
             </div>
@@ -105,23 +105,17 @@
 
 <script th:inline="javascript">
     /*<![CDATA[*/
-
     let board = null;
-
     function getBoardData(boardId) {
-
-        board = {
-            "board_id" : boardId
-        };
-
+        board = {"board_id" : boardId};
         $.ajax({
             url : "/toy/findBoard",
             data : board,
             type : "GET",
             success : (data) =>{
-                console.log(data);
                 $("#boardData").empty();
-                $("#boardData").append("<p>"+ data.title +"</p>");
+                $("#boardData").append("<h4>"+ data.title +"</h4>");
+                $("#boardData").append("<hr class='my-4'>");
                 $("#boardData").append("<p>"+ data.contents +"</p>");
                 $("#boardData").append("<input type='hidden' value='"+ data.board_id +"' id='boardId'>");
             }
@@ -133,9 +127,7 @@
             url : "/toy/deleteBoard",
             data : board,
             type : "GET",
-            success : () =>{
-                window.location.reload();
-            }
+            success : () =>{window.location.reload();}
         })
     }
     /*]]>*/
