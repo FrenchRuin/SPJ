@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,8 +28,13 @@ public class ToyProjectService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
 
-    private static final String API_URL = "https://api.kakaobrain.com/v1/inference/karlo/t2i";
-    private static final String REST_API_KEY = "bb67167c460f9277d6a14292f196b274";
+
+    private static final String KARLO_API_URL = "https://api.kakaobrain.com/v1/inference/karlo/t2i";
+    private static final String PAPAGO_API_URL = "https://openapi.naver.com/v1/papago/n2mt";
+
+    private static final String KAKAO_API_KEY = "bb67167c460f9277d6a14292f196b274";
+    private static final String NAVER_CLIENT_ID = "0QJhbYw2IhHIs78ihpxV";
+    private static final String NAVER_SECRET = "LSz5CRvuF4";
 
     /* Board Service Section */
 
@@ -56,16 +62,15 @@ public class ToyProjectService {
 
 
     /* Karlo API Section */
-
     public String getKarloImage(String requested) {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        httpHeaders.add("Authorization", "KakaoAK "+ REST_API_KEY);
+        httpHeaders.add("Authorization", "KakaoAK "+ KAKAO_API_KEY);
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("text",requested);
+        jsonObject.put("text",getPapago(requested));
         jsonObject.put("batch_size",1);
 
         JSONObject jsonObject1 = new JSONObject();
@@ -73,7 +78,7 @@ public class ToyProjectService {
 
         HttpEntity<String> request = new HttpEntity<>(jsonObject1.toString(),httpHeaders);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(API_URL,request,String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(KARLO_API_URL,request,String.class);
 
         /* ResponseEntity의 경우에는 Json Object로 바로 변환이 가능 // Parser 필요 없음 */
         JSONObject result = new JSONObject(response.getBody());
@@ -83,4 +88,26 @@ public class ToyProjectService {
         return resultArray.getJSONObject(0).get("image").toString();
     }
 
+    /* PAPAGO API Section */
+    public String getPapago(String requested){
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("X-Naver-Client-Id", NAVER_CLIENT_ID);
+        headers.add("X-Naver-Client-Secret", NAVER_SECRET);
+
+        JSONObject object = new JSONObject();
+        object.put("source", "ko");
+        object.put("target", "en");
+        object.put("text", requested);
+        HttpEntity<String> request = new HttpEntity<>(object.toString(),headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(PAPAGO_API_URL, request,String.class);
+
+        JSONObject result = new JSONObject(response.getBody());
+        JSONObject obj = (JSONObject) result.get("message");
+        JSONObject obj1 = (JSONObject) obj.get("result");
+        return obj1.get("translatedText").toString();
+    }
 }
