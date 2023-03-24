@@ -2,6 +2,7 @@ package com.example.spj.controller;
 
 import com.example.spj.entity.board.Board;
 import com.example.spj.entity.user.User;
+import com.example.spj.service.KarloService;
 import com.example.spj.service.ToyProjectService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import java.util.Optional;
 public class ToyProjectController {
 
     private final ToyProjectService toyProjectService;
+    private final KarloService karloService;
 
     @GetMapping("/toy")
     public String main(Model model) {
@@ -62,5 +64,10 @@ public class ToyProjectController {
         log.info("{}", board);
         toyProjectService.deleteBoard(board);
         return "/toy/board";
+    }
+
+    @GetMapping("/toy/apiTest")
+    public void apiTest(){
+        karloService.callLink();
     }
 }

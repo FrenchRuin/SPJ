@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .rememberMe()
                 .rememberMeParameter("remember-me")
                 .tokenValiditySeconds(3600)
-                .alwaysRemember(false)
+                .alwaysRemember(true)
                 .userDetailsService(userService)
                 .and()
                 .authenticationManager(authenticationManager)
