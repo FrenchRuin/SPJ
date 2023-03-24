@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:replace="fragment/config :: configFragment"></th:block>
+</head>
+<body>
+<th:block th:replace="fragment/header :: headerFragment"></th:block>
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+        <div class="col-md-6 px-0">
+            <h1 class="display-4 fst-italic">Karlo AI Picture</h1>
+        </div>
+    </div>
+    <div class="row g-5">
+        <div class="col-md-8">
+            <h4 class="text-muted col-md-8">Picture</h4>
+            <img class="img-fluid" id="karloImageSection" th:src="@{../images/DevFace.jpg}" alt="" >
+        </div>
+        <div class="col-md-4">
+            <div class="position-sticky" style="top: 2rem;">
+                <h4 class="text-muted">What Do you want? </h4>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="requested" name="requested" style="height: 100px"></textarea>
+                    <label for="requested">Requested</label>
+                </div>
+                <button class="w-100 mb-2 btn rounded-3 btn-info" th:onclick="|javascript:getKarloImage()|" type="button">OK</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<th:block th:replace="fragment/footer :: footerFragment"></th:block>
+</body>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    function getKarloImage(){
+        var requested = $("#requested").val();
+        console.log(requested);
+    }
+
+    /*]]>*/
+</script>
+</html>

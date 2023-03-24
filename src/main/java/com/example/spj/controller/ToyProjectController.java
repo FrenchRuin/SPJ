@@ -2,7 +2,6 @@ package com.example.spj.controller;
 
 import com.example.spj.entity.board.Board;
 import com.example.spj.entity.user.User;
-import com.example.spj.service.KarloService;
 import com.example.spj.service.ToyProjectService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +21,6 @@ import java.util.Optional;
 public class ToyProjectController {
 
     private final ToyProjectService toyProjectService;
-    private final KarloService karloService;
 
     @GetMapping("/toy")
     public String main(Model model) {
@@ -30,12 +28,13 @@ public class ToyProjectController {
         return "toy/toyIndex";
     }
 
+    /* Board Section */
+
     @GetMapping("/toy/board")
     public String board(Model model, @RequestParam(value = "wrongUser", required = false , defaultValue = "true") boolean wrongUser) {
         model.addAttribute("prevPage", "/toy");
         model.addAttribute("boardList", toyProjectService.findAllBoard());
         model.addAttribute("wrongUser", wrongUser);
-
         return "toy/board";
     }
 
@@ -66,8 +65,15 @@ public class ToyProjectController {
         return "/toy/board";
     }
 
-    @GetMapping("/toy/apiTest")
-    public void apiTest(){
-        karloService.callLink();
+    /* karlo API Section*/
+
+    @GetMapping("/toy/karlo")
+    public String karlo() {
+        return "/toy/karlo";
+    }
+    @GetMapping("/toy/getKarloImage")
+    @ResponseBody
+    public void getKarloImage(){
+        toyProjectService.getKarloImage();
     }
 }
