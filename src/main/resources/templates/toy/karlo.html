@@ -14,9 +14,12 @@
         </div>
     </div>
     <div class="row g-5">
-        <div class="col-md-8">
+        <div class="col-md-8" id="karloImageSection">
             <h4 class="text-muted col-md-8">Picture</h4>
-            <img class="img-fluid" id="karloImageSection" th:src="@{../images/DevFace.jpg}" alt="" >
+            <button class="btn btn-primary" type="button" id="loadingImage" hidden disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="visually-hidden">Loading...</span>
+            </button>
         </div>
         <div class="col-md-4">
             <div class="position-sticky" style="top: 2rem;">
@@ -26,6 +29,9 @@
                     <label for="requested">Requested</label>
                 </div>
                 <button class="w-100 mb-2 btn rounded-3 btn-info" th:onclick="|javascript:getKarloImage()|" type="button">OK</button>
+                <div class="alert alert-dark" id="requestedAlert" hidden role="alert">
+                    요청사항을 입력해주세요.
+                </div>
             </div>
         </div>
     </div>
@@ -37,9 +43,28 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
 
+
+
     function getKarloImage(){
-        var requested = $("#requested").val();
-        console.log(requested);
+
+        if($("#requested").val() == ""){
+            $("#requestedAlert").removeAttr("hidden");
+            return false;
+        }
+
+        $("#loadingImage").removeAttr("hidden");
+        $("#requestedAlert").attr("hidden","hidden");
+
+        $.ajax({
+            url : "/toy/getKarloImage",
+            data : {"requested" : $("#requested").val()} ,
+            type : "POST",
+            success : (data) =>{
+                $("#karloImageSection").append("<img src='data:image/png;base64,"+ data +"' class='img-fluid'/>");
+                $("#loadingImage").attr("hidden","hidden");
+            }
+        })
+
     }
 
     /*]]>*/

@@ -71,9 +71,11 @@ public class ToyProjectController {
     public String karlo() {
         return "/toy/karlo";
     }
-    @GetMapping("/toy/getKarloImage")
+
+    @PostMapping("/toy/getKarloImage")
     @ResponseBody
-    public void getKarloImage(){
-        toyProjectService.getKarloImage();
+    public String getKarloImage(@RequestParam(name = "requested") String requested){
+        log.info("requested >> {}" , requested);
+        return toyProjectService.getKarloImage(requested);
     }
 }

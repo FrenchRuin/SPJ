@@ -6,6 +6,7 @@ import com.example.spj.repository.BoardRepository;
 import com.example.spj.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -56,8 +57,7 @@ public class ToyProjectService {
 
     /* Karlo API Section */
 
-    public void getKarloImage() {
-
+    public String getKarloImage(String requested) {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -65,7 +65,7 @@ public class ToyProjectService {
         httpHeaders.add("Authorization", "KakaoAK "+ REST_API_KEY);
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("text","Tree");
+        jsonObject.put("text",requested);
         jsonObject.put("batch_size",1);
 
         JSONObject jsonObject1 = new JSONObject();
@@ -75,7 +75,12 @@ public class ToyProjectService {
 
         ResponseEntity<String> response = restTemplate.postForEntity(API_URL,request,String.class);
 
-        /* ResponseEntity의 경우에는 Json Object로 바로 변환이 가능 // Parser 필요 없음 ^^ */
+        /* ResponseEntity의 경우에는 Json Object로 바로 변환이 가능 // Parser 필요 없음 */
         JSONObject result = new JSONObject(response.getBody());
+
+        JSONArray resultArray = (JSONArray) result.get("images");
+
+        return resultArray.getJSONObject(0).get("image").toString();
     }
+
 }
