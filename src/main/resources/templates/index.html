@@ -12,7 +12,7 @@
 <main>
     <th:block th:replace="fragment/header :: headerFragment"></th:block>
     <div class="container py-2">
-        <div class="row align-items-md-stretch mb-4">
+        <div class="row align-items-md-stretch mb-2">
             <div class="col-md-8">
                 <div class="h-100 p-5 text-bg-dark rounded-3">
                     <h2>Welcome</h2>
@@ -27,40 +27,14 @@
                 </div>
             </div>
         </div>
-        <div class="row align-items-md-stretch">
-            <div class="col-md-4">
-                <div class="h-100 p-5 text-bg-dark rounded-3">
-                    <h2>토이프로젝트</h2>
-                    <p></p>
-                    <button class="btn btn-outline-light" th:onclick="|location.href='@{/toy}'|"  type="button">
-                        Go
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="h-100 p-5 bg-light border rounded-3">
-                    <h2>Add borders</h2>
-                    <p>테스트</p>
-                    <button class="btn btn-outline-secondary" th:onclick="|location.href='@{/toy/apiTest}'|"  type="button">
-                        Go
-                    </button>
-                </div>
-            </div>
-        </div>
         <div class="container px-4 py-5" id="hanging-icons">
             <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
                 <div class="col d-flex align-items-start">
-                    <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-                        <svg class="bi" width="1em" height="1em">
-                            <use xlink:href="#toggles2"/>
-                        </svg>
-                    </div>
                     <div>
-                        <h3 class="fs-2">Featured title</h3>
-                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
-                            sentence and probably just keep going until we run out of words.</p>
-                        <a href="#" class="btn btn-primary">
-                            Primary button
+                        <h3 class="fs-2"> <i class="bi bi-cast"></i> Toy Project</h3>
+                        <p>각종 토이프로젝트를 만들었습니다. <br> 들어가셔서 경험해보시길 바랍니다.</p>
+                        <a th:href="@{/toy}" class="btn btn-primary">
+                            Go Detail
                         </a>
                     </div>
                 </div>
@@ -74,7 +48,7 @@
                         <h3 class="fs-2">Featured title</h3>
                         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another
                             sentence and probably just keep going until we run out of words.</p>
-                        <a href="#" class="btn btn-primary">
+                        <a  th:href="@{/toy}" class="btn btn-primary">
                             Primary button
                         </a>
                     </div>

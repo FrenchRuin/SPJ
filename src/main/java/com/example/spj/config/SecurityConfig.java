@@ -33,7 +33,7 @@ public class SecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeRequests().antMatchers("/login" , "/loginError").permitAll().anyRequest().authenticated().and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/", false).failureUrl("/loginError")
+                .formLogin().loginPage("/login").defaultSuccessUrl("/main", false).failureUrl("/loginError")
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
                 .and()
                 .rememberMe()

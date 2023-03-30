@@ -68,7 +68,8 @@ public class ToyProjectController {
     /* karlo API Section*/
 
     @GetMapping("/toy/karlo")
-    public String karlo() {
+    public String karlo(Model model) {
+        model.addAttribute("prevPage", "/toy");
         return "/toy/karlo";
     }
 

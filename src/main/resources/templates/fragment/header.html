@@ -5,18 +5,14 @@
     <title>Title</title>
 </head>
 <body th:fragment="headerFragment">
-<header class="mb-4">
+<header class="mb-4 mt-5">
     <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <a th:if="${prevPage  != '/'}" th:href="${prevPage}" class="btn btn-info d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                <span>Prev</span>
+            <a th:if="${prevPage} != null" th:href="${prevPage}" class="btn btn-info">
+                <i class="bi bi-backspace"></i> Back
             </a>
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">임시</span>
-            </div>
-            <div class="col-md-3 text-end">
-                <button type="button" class="btn btn-success" th:onclick="|location.href='@{/logout}'|">LogOut</button>
-            </div>
+            <button th:if="${prevPage} != null" type="button" class="btn btn-success" th:onclick="|location.href='@{/}'|"> <i class="bi bi-house"></i> Home</button>
+            <button type="button" class="btn btn-dark" th:onclick="|location.href='@{/logout}'|"><i class="bi bi-unlock"></i>LogOut</button>
         </header>
     </div>
 </header>

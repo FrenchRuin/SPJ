@@ -20,6 +20,7 @@
                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                 <span class="visually-hidden">Loading...</span>
             </button>
+            <img src='#' id='karloImage' class='img-fluid'/>
         </div>
         <div class="col-md-4">
             <div class="position-sticky" style="top: 2rem;">
@@ -58,7 +59,7 @@
             data : {"requested" : $("#requested").val()} ,
             type : "POST",
             success : (data) =>{
-                $("#karloImageSection").append("<img src='data:image/png;base64,"+ data +"' class='img-fluid'/>");
+                $("#karloImage").attr("src", 'data:image/png;base64,'+ data);
                 $("#loadingImage").attr("hidden","hidden");
             }
         })

@@ -36,7 +36,11 @@ public class ToyProjectService {
     private static final String NAVER_CLIENT_ID = "0QJhbYw2IhHIs78ihpxV";
     private static final String NAVER_SECRET = "LSz5CRvuF4";
 
-    /* Board Service Section */
+    /*
+    *
+    * Board Service Section
+    *
+     */
 
     public List<Board> findAllBoard(){
         return boardRepository.findAll();
@@ -61,7 +65,11 @@ public class ToyProjectService {
     }
 
 
-    /* Karlo API Section */
+    /*
+    *
+    * Karlo API Section
+    *
+    * */
     public String getKarloImage(String requested) {
         RestTemplate restTemplate = new RestTemplate();
 
@@ -88,7 +96,12 @@ public class ToyProjectService {
         return resultArray.getJSONObject(0).get("image").toString();
     }
 
-    /* PAPAGO API Section */
+    /* *
+    *
+    *
+    * PAPAGO API Section
+    *
+    *  */
     public String getPapago(String requested){
         RestTemplate restTemplate = new RestTemplate();
 

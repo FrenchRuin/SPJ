@@ -3,21 +3,15 @@ package com.example.spj.service;
 import com.example.spj.entity.board.Board;
 import com.example.spj.entity.user.User;
 import com.example.spj.repository.BoardRepository;
-import com.example.spj.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Slf4j
 class MainServiceTest {
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private BoardRepository boardRepository;
