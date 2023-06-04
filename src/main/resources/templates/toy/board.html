@@ -8,9 +8,9 @@
 <body>
 <th:block th:replace="fragment/header :: headerFragment"></th:block>
 <main class="container">
-    <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
-        <div class="col-md-6 px-0">
-            <h1 class="display-4 fst-italic">Guest Book</h1>
+    <div class="align-items-md-stretch mb-4">
+        <div class="h-100 p-5 text-bg-dark rounded-3">
+            <h1><i class="bi bi-emoji-smile-fill"></i> Guest Book</h1>
         </div>
     </div>
     <div class="row g-5">
@@ -39,12 +39,10 @@
             <div class="position-sticky" style="top: 2rem;">
                 <form method="post" th:action="@{/toy/saveBoard}">
                     <h4 class="text-muted">Write here </h4>
-                    <div class="row align-items-center">
-                        <div class="form-floating mb-3 col">
-                            <input type="text" class="form-control " id="username" name="username"
-                                   required>
-                            <label for="username">UserName</label>
-                        </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control " id="username" name="username"
+                               required>
+                        <label for="username">UserName</label>
                     </div>
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" id="title" name="title">

@@ -14,17 +14,17 @@
     <div class="container">
         <div class="row align-items-md-stretch">
             <div class="col-md-8">
-                <div class="h-100 p-5 text-bg-dark rounded-3">
+                <div class="p-5 text-bg-dark rounded-3">
                     <h2><i class="bi bi-emoji-smile-fill"></i> Welcome</h2>
                     <p>I'm Lee Jae-chan, the current junior developer. <br>
                         I showed various Toy projects and my introduction. :) </p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="h-100 p-5 bg-light border rounded-3 ">
+                <div class="p-5 bg-light border rounded-3 ">
                     <h2><i class="bi bi-info-circle"></i> Dev Info </h2>
                     <p>(Under development)</p>
-                    <!--                    <button class="btn btn-outline-secondary" th:onclick="|location.href='@{/devInfo}'|"  type="button">Go Detail</button>-->
+                    <button class="btn btn-outline-secondary" th:onclick="|location.href='@{/devInfo}'|"  type="button" disabled>Go Detail</button>
                 </div>
             </div>
         </div>
@@ -32,32 +32,36 @@
             <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
                 <div class="col d-flex justify-content-center align-items-center">
                     <div>
-                        <h3 class="fs-2"><i class="bi bi-cast"></i> Toy Project</h3>
+                        <h3 class="fs-2"><i class="bi bi-journal"></i> Guest Book </h3>
+                        <div class="mb-1 text-muted">2023-02-25 ~ 2023-03-24</div>
                         <p>I've created several personal projects. <br> I recommend you to experience it.</p>
-                        <button class="btn btn-success" th:onclick="|location.href ='@{/toy}'|">
+                        <p class="card-text mb-2">JPA / SPRING / H2</p>
+                        <button class="btn btn-success" th:onclick="|location.href ='@{/toy/board}'|">
                             <i class="bi bi-arrow-right-circle"></i>
                         </button>
                     </div>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center">
                     <div>
-                        <h3 class="fs-2"> <div class="spinner-border" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                            Preparing...</h3>
+                        <h3 class="fs-2"><i class="bi bi-image"></i> Karlo AI picture </h3>
+                        <div class="mb-1 text-muted">2023-03-24 ~ 2023-03-28</div>
                         <p>I've created several personal projects. <br> I recommend you to experience it.</p>
-                        <button class="btn btn-success" disabled>
+                        <p class="card-text mb-2">REST API / KAKAO API</p>
+                        <button class="btn btn-success" th:onclick="|location.href ='@{/toy/karlo}'|">
                             <i class="bi bi-arrow-right-circle"></i>
                         </button>
                     </div>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center">
                     <div>
-                        <h3 class="fs-2"> <div class="spinner-border" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
+                        <h3 class="fs-2">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
                             Preparing...</h3>
+                        <div class="mb-1 text-muted">(Under Development)</div>
                         <p>I've created several personal projects. <br> I recommend you to experience it.</p>
+                        <p class="card-text mb-2">REST API / KAKAO API</p>
                         <button class="btn btn-success" disabled>
                             <i class="bi bi-arrow-right-circle"></i>
                         </button>

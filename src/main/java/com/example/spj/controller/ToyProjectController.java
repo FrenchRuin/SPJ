@@ -22,17 +22,9 @@ public class ToyProjectController {
 
     private final ToyProjectService toyProjectService;
 
-    @GetMapping("/toy")
-    public String main(Model model) {
-        model.addAttribute("prevPage", "/main");
-        return "toy/toyIndex";
-    }
-
-    /* Board Section */
-
     @GetMapping("/toy/board")
     public String board(Model model, @RequestParam(value = "wrongUser", required = false , defaultValue = "true") boolean wrongUser) {
-        model.addAttribute("prevPage", "/toy");
+        model.addAttribute("prevPage", "/");
         model.addAttribute("boardList", toyProjectService.findAllBoard());
         model.addAttribute("wrongUser", wrongUser);
         return "toy/board";
@@ -69,7 +61,7 @@ public class ToyProjectController {
 
     @GetMapping("/toy/karlo")
     public String karlo(Model model) {
-        model.addAttribute("prevPage", "/toy");
+        model.addAttribute("prevPage", "/");
         return "/toy/karlo";
     }
 

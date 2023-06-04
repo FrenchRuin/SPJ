@@ -19,7 +19,4 @@ public class MainController {
     public String devInfo() {
         return "devInfo";
     }
-
-
-
 }
