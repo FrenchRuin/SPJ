@@ -22,3 +22,12 @@ spring:
         format_sql: true
 server:
   port: 9091
+
+naver:
+  papago: "https://openapi.naver.com/v1/papago/n2mt"
+  id : "0QJhbYw2IhHIs78ihpxV"
+  secret : "LSz5CRvuF4"
+
+kakao:
+  karlo: "https://api.kakaobrain.com/v1/inference/karlo/t2i"
+  id : "bb67167c460f9277d6a14292f196b274"

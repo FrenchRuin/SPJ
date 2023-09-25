@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.jpa.repository.query.JpaQueryCreator;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,16 +27,32 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ToyProjectService {
 
-    private final BoardRepository boardRepository;
-    private final UserRepository userRepository;
+    @Autowired
+    public ToyProjectService(BoardRepository boardRepository, UserRepository userRepository) {
+        this.boardRepository = boardRepository;
+        this.userRepository = userRepository;
+    }
+
+    private BoardRepository boardRepository;
+
+    private  UserRepository userRepository;
+
+    @Value("${kakao.karlo}")
+    private String KARLO_API_URL;
+
+    @Value("${kakao.id}")
+    private String KAKAO_API_KEY;
+
+    @Value("${naver.papago}")
+    private String PAPAGO_API_URL;
+
+    @Value("${naver.id}")
+    private String NAVER_CLIENT_ID;
+
+    @Value("${naver.secret}")
+    private String NAVER_SECRET;
 
 
-    private static final String KARLO_API_URL = "https://api.kakaobrain.com/v1/inference/karlo/t2i";
-    private static final String PAPAGO_API_URL = "https://openapi.naver.com/v1/papago/n2mt";
-
-    private static final String KAKAO_API_KEY = "bb67167c460f9277d6a14292f196b274";
-    private static final String NAVER_CLIENT_ID = "0QJhbYw2IhHIs78ihpxV";
-    private static final String NAVER_SECRET = "LSz5CRvuF4";
 
     /*
     *
