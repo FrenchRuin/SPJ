@@ -1,6 +1,5 @@
-package com.example.spj.entity.user;
+package com.example.spj.entity;
 
-import com.example.spj.entity.board.Board;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
@@ -37,7 +36,7 @@ public class User implements UserDetails {
     private Set<UserAuthority> authorities;
 
     @OneToMany(mappedBy = "user")
-    private List<Board> boards;
+    private List<Board> boardEntities;
 
     @Column(updatable = false)
     private LocalDateTime created;

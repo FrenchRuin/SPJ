@@ -1,7 +1,7 @@
 package com.example.spj.service;
 
-import com.example.spj.entity.board.Board;
-import com.example.spj.entity.user.User;
+import com.example.spj.entity.Board;
+import com.example.spj.entity.User;
 import com.example.spj.repository.BoardRepository;
 import com.example.spj.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.jpa.repository.query.JpaQueryCreator;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -52,8 +51,6 @@ public class ToyProjectService {
     @Value("${naver.secret}")
     private String NAVER_SECRET;
 
-
-
     /*
     *
     * Board Service Section
@@ -67,7 +64,7 @@ public class ToyProjectService {
     public User saveBoard(Board board, User user) {
         User saveUser = userRepository.findByUsername(user.getUsername()).orElse(null);
         if (saveUser != null) {
-            board.setCreated(LocalDateTime.now());
+            board.setCreatedTime(LocalDateTime.now());
             board.setUser(saveUser);
             boardRepository.save(board);
         }
@@ -81,7 +78,6 @@ public class ToyProjectService {
     public void deleteBoard(Board board) {
         boardRepository.deleteById(board.getBoard_id());
     }
-
 
     /*
     *

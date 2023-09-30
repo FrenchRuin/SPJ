@@ -1,7 +1,7 @@
 package com.example.spj.controller;
 
 import com.example.spj.config.UserService;
-import com.example.spj.entity.user.User;
+import com.example.spj.entity.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

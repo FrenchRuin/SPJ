@@ -41,6 +41,8 @@ class ToyProjectServiceTest {
         HttpEntity<String> request = new HttpEntity<>(object.toString(),headers);
 
         ResponseEntity<String> response = restTemplate.postForEntity(PAPAGO_API_URL, request,String.class);
+
+        log.info("response entity = {}", response.getBody() );
     }
 
 

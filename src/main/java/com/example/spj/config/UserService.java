@@ -1,7 +1,7 @@
 package com.example.spj.config;
 
-import com.example.spj.entity.user.User;
-import com.example.spj.entity.user.UserAuthority;
+import com.example.spj.entity.User;
+import com.example.spj.entity.UserAuthority;
 import com.example.spj.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

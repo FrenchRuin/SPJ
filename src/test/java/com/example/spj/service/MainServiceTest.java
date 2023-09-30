@@ -1,7 +1,7 @@
 package com.example.spj.service;
 
-import com.example.spj.entity.board.Board;
-import com.example.spj.entity.user.User;
+import com.example.spj.entity.Board;
+import com.example.spj.entity.User;
 import com.example.spj.repository.BoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;

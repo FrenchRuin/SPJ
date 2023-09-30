@@ -1,8 +1,8 @@
 package com.example.spj.util;
 
 import com.example.spj.config.UserService;
-import com.example.spj.entity.board.Board;
-import com.example.spj.entity.user.User;
+import com.example.spj.entity.Board;
+import com.example.spj.entity.User;
 import com.example.spj.service.ToyProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
@@ -38,7 +38,7 @@ public class DBInit implements InitializingBean {
             Board board = Board.builder()
                     .board_id(1L)
                     .contents("끝내줍니다.")
-                    .created(LocalDateTime.now())
+                    .createdTime(LocalDateTime.now())
                     .title("테스트용")
                     .build();
             toyProjectService.saveBoard(board, director);

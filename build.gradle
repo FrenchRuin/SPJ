@@ -24,6 +24,8 @@ dependencies {
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation 'org.json:json:20230227'
 
+    // openApi replace SwaggerUI
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
 
 //    runtimeOnly 'com.h2database:h2'
 //    implementation 'mysql:mysql-connector-java'
