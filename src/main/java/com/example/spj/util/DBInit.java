@@ -25,23 +25,20 @@ public class DBInit implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-        if (userService.findUser("toxic023").isEmpty()) {
-            User director = userService.saveUser(
-                    User.builder()
-                            .username("toxic023")
-                            .password(passwordEncoder.encode("as2646"))
-                            .enabled(true)
-                            .build()
-            );
-            userService.addAuthority(director.getUserId(), "ROLE_ADMIN");
-            Board board = Board.builder()
-                    .board_id(1L)
-                    .contents("끝내줍니다.")
-                    .createdTime(LocalDateTime.now())
-                    .title("테스트용")
-                    .build();
-            toyProjectService.saveBoard(board, director);
-        }
+        User director = userService.saveUser(
+                User.builder()
+                        .username("toxic023")
+                        .password(passwordEncoder.encode("as2646"))
+                        .enabled(true)
+                        .build()
+        );
+        userService.addAuthority(director.getUserId(), "ROLE_ADMIN");
+        Board board = Board.builder()
+                .board_id(1L)
+                .contents("끝내줍니다.")
+                .createdTime(LocalDateTime.now())
+                .title("테스트용")
+                .build();
+        toyProjectService.saveBoard(board, director);
     }
 }

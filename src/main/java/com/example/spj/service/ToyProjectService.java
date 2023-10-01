@@ -34,22 +34,22 @@ public class ToyProjectService {
 
     private BoardRepository boardRepository;
 
-    private  UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Value("${kakao.karlo}")
-    private String KARLO_API_URL;
+    private static String KARLO_API_URL;
 
     @Value("${kakao.id}")
-    private String KAKAO_API_KEY;
+    private static String KAKAO_API_KEY;
 
     @Value("${naver.papago}")
-    private String PAPAGO_API_URL;
+    private static String PAPAGO_API_URL;
 
     @Value("${naver.id}")
-    private String NAVER_CLIENT_ID;
+    private static String NAVER_CLIENT_ID;
 
     @Value("${naver.secret}")
-    private String NAVER_SECRET;
+    private static String NAVER_SECRET;
 
     /*
     *
@@ -62,7 +62,7 @@ public class ToyProjectService {
     }
 
     public User saveBoard(Board board, User user) {
-        User saveUser = userRepository.findByUsername(user.getUsername()).orElse(null);
+        User saveUser = userRepository.findByUsername(user.getUsername());
         if (saveUser != null) {
             board.setCreatedTime(LocalDateTime.now());
             board.setUser(saveUser);

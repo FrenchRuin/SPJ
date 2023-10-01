@@ -17,16 +17,20 @@ public class BoardDto {
     private Long board_id;
     private String title;
     private String contents;
-    private User user;
+    private UserDto user;
     private LocalDateTime createdTime;
     private LocalDateTime updatedTime;
 
     // board Dto to board Entity
     public static BoardDto boardEntityToDto(Board board){
+
+        User user = board.getUser();
+        UserDto userDto = UserDto.userEntityToDto(user);
+
         return BoardDto.builder()
                 .board_id(board.getBoard_id())
-                .user(board.getUser())
                 .title(board.getTitle())
+                .user(userDto)
                 .contents(board.getContents())
                 .createdTime(board.getCreatedTime())
                 .updatedTime(board.getUpdatedTime())

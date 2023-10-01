@@ -25,5 +25,4 @@ public class UserAuthority implements GrantedAuthority {
     private Long authority_id;
 
     private String authority;
-
 }

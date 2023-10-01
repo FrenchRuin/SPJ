@@ -26,12 +26,10 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("로그인 요청 ID >>>>> {} ", username);
-        return userRepository.findByUsername(username).orElseThrow(
-                () -> new IllegalArgumentException(username + "가 없습니다.")
-        );
+        return userRepository.findByUsername(username);
     }
 
-    public Optional<User> findUser(String username) {
+    public User findUser(String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -39,6 +37,9 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+    /*
+     * 권한 부여 메소드
+     * */
     public void addAuthority(Long userId, String authority) {
         userRepository.findById(userId).ifPresent(user -> {
                     UserAuthority role = new UserAuthority(userId, authority);
@@ -57,14 +58,18 @@ public class UserService implements UserDetailsService {
         );
     }
 
+    /*
+    * 회원가입 요청 메소드
+    * ROLE_USER
+    * */
     public void signUp(User user) {
         log.info("회원가입 요청 >>> {}", user.getUsername());
 
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User spjUser = saveUser(User.builder()
                 .username(user.getUsername())
-                .created(LocalDateTime.now())
-                .updated(LocalDateTime.now())
+                .createdTime(LocalDateTime.now())
+                .updatedTime(LocalDateTime.now())
                 .password(passwordEncoder.encode(user.getPassword()))
                 .enabled(true)
                 .build());

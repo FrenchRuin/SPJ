@@ -2,6 +2,7 @@ package com.example.spj.entity;
 
 
 import com.example.spj.dto.BoardDto;
+import com.example.spj.dto.UserDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -38,10 +39,12 @@ public class Board {
 
     // board Entity to Dto
     public static Board boardDtoToEntity(BoardDto boardDto){
+
+        User user = User.userDtoToEntity(boardDto.getUser());
         return Board.builder()
                 .board_id(boardDto.getBoard_id())
-                .user(boardDto.getUser())
                 .title(boardDto.getTitle())
+                .user(user)
                 .contents(boardDto.getContents())
                 .createdTime(boardDto.getCreatedTime())
                 .updatedTime(boardDto.getUpdatedTime())

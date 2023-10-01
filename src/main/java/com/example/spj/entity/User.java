@@ -1,21 +1,20 @@
 package com.example.spj.entity;
 
+import com.example.spj.dto.UserDto;
+import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @Builder
 @Entity
 @Table(name = "spj_user")
@@ -36,13 +35,12 @@ public class User implements UserDetails {
     private Set<UserAuthority> authorities;
 
     @OneToMany(mappedBy = "user")
-    private List<Board> boardEntities;
+    private List<Board> boards;
 
     @Column(updatable = false)
-    private LocalDateTime created;
+    private LocalDateTime createdTime;
 
-    private LocalDateTime updated;
-
+    private LocalDateTime updatedTime;
 
     @Override
     public boolean isAccountNonExpired() {
@@ -59,4 +57,17 @@ public class User implements UserDetails {
         return enabled;
     }
 
+    /*
+     * UserDto to UserEntity Converter
+     * */
+    public static User userDtoToEntity(UserDto userDto){
+        return User.builder()
+                .username(userDto.getUsername())
+                .enabled(userDto.isEnabled())
+                .password(userDto.getPassword())
+                .updatedTime(userDto.getUpdatedTime())
+                .createdTime(userDto.getCreatedTime())
+                .userId(userDto.getUserId())
+                .build();
+    }
 }
