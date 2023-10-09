@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -31,9 +32,7 @@ public class ToyProjectService {
         this.boardRepository = boardRepository;
         this.userRepository = userRepository;
     }
-
     private BoardRepository boardRepository;
-
     private UserRepository userRepository;
 
     @Value("${kakao.karlo}")
@@ -42,22 +41,15 @@ public class ToyProjectService {
     @Value("${kakao.id}")
     private static String KAKAO_API_KEY;
 
-    @Value("${naver.papago}")
-    private static String PAPAGO_API_URL;
 
-    @Value("${naver.id}")
-    private static String NAVER_CLIENT_ID;
-
-    @Value("${naver.secret}")
-    private static String NAVER_SECRET;
 
     /*
-    *
-    * Board Service Section
-    *
+     *
+     * Board Service Section
+     *
      */
 
-    public List<Board> findAllBoard(){
+    public List<Board> findAllBoard() {
         return boardRepository.findAll();
     }
 
@@ -80,27 +72,27 @@ public class ToyProjectService {
     }
 
     /*
-    *
-    * Karlo API Section
-    *
-    * */
+     *
+     * Karlo API Section
+     *
+     * */
     public String getKarloImage(String requested) {
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        httpHeaders.add("Authorization", "KakaoAK "+ KAKAO_API_KEY);
+        httpHeaders.add("Authorization", "KakaoAK " + KAKAO_API_KEY);
 
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("text",getPapago(requested));
-        jsonObject.put("batch_size",1);
+        jsonObject.put("text", getPapago("ko", "en", requested));
+        jsonObject.put("batch_size", 1);
 
         JSONObject jsonObject1 = new JSONObject();
-        jsonObject1.put("prompt",jsonObject);
+        jsonObject1.put("prompt", jsonObject);
 
-        HttpEntity<String> request = new HttpEntity<>(jsonObject1.toString(),httpHeaders);
+        HttpEntity<String> request = new HttpEntity<>(jsonObject1.toString(), httpHeaders);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(KARLO_API_URL,request,String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(KARLO_API_URL, request, String.class);
 
         /* ResponseEntity의 경우에는 Json Object로 바로 변환이 가능 // Parser 필요 없음 */
         JSONObject result = new JSONObject(response.getBody());
@@ -111,30 +103,37 @@ public class ToyProjectService {
     }
 
     /* *
-    *
-    *
-    * PAPAGO API Section
-    *
-    *  */
-    public String getPapago(String requested){
+     *
+     *
+     * PAPAGO API Section
+     *
+     *  */
+
+    public String getPapago(String source, String target, String requested) {
+
+        String apiUrl = "https://openapi.naver.com/v1/papago/n2mt";
+        String clientId = "0QJhbYw2IhHIs78ihpxV";
+        String clientSecret = "LSz5CRvuF4";
+
         RestTemplate restTemplate = new RestTemplate();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("X-Naver-Client-Id", NAVER_CLIENT_ID);
-        headers.add("X-Naver-Client-Secret", NAVER_SECRET);
+        headers.add("X-Naver-Client-Id", clientId);
+        headers.add("X-Naver-Client-Secret", clientSecret);
 
-        JSONObject object = new JSONObject();
-        object.put("source", "ko");
-        object.put("target", "en");
-        object.put("text", requested);
-        HttpEntity<String> request = new HttpEntity<>(object.toString(),headers);
+        JSONObject requestObject = new JSONObject();
+        requestObject.put("source", source);
+        requestObject.put("target", target);
+        requestObject.put("text", requested);
+        HttpEntity<String> request = new HttpEntity<>(requestObject.toString(), headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity(PAPAGO_API_URL, request,String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(apiUrl, request, String.class);
 
         JSONObject result = new JSONObject(response.getBody());
-        JSONObject obj = (JSONObject) result.get("message");
-        JSONObject obj1 = (JSONObject) obj.get("result");
-        return obj1.get("translatedText").toString();
+        log.info("result === {}" ,result);
+        JSONObject message = (JSONObject) result.get("message");
+        JSONObject translatedText = (JSONObject) message.get("result");
+        return translatedText.get("translatedText").toString();
     }
 }

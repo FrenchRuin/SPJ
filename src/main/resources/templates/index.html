@@ -13,19 +13,8 @@
     <th:block th:replace="fragment/header :: headerFragment"></th:block>
     <div class="container">
         <div class="row align-items-md-stretch">
-            <div class="col-md-8">
-                <div class="p-5 text-bg-dark rounded-3">
-                    <h2><i class="bi bi-emoji-smile-fill"></i> Welcome</h2>
-                    <p>I'm Lee Jae-chan, the current junior developer. <br>
-                        I showed various Toy projects and my introduction. :) </p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-5 bg-light border rounded-3 ">
-                    <h2><i class="bi bi-info-circle"></i> Dev Info </h2>
-                    <p>(Under development)</p>
-                    <button class="btn btn-outline-secondary" th:onclick="|location.href='@{/devInfo}'|"  type="button" disabled>Go Detail</button>
-                </div>
+            <div class="p-5 text-bg-dark rounded-3">
+                <h2><i class="bi bi-emoji-smile-fill"></i> 내가 만들고 싶어서 만든 프로젝트 </h2>
             </div>
         </div>
         <div class="container px-4 py-5" id="hanging-icons">
@@ -34,7 +23,7 @@
                     <div>
                         <h3 class="fs-2"><i class="bi bi-journal"></i> Guest Book </h3>
                         <div class="mb-1 text-muted">2023-02-25 ~ 2023-03-24</div>
-                        <p>I've created several personal projects. <br> I recommend you to experience it.</p>
+                        <p  class="fw-bold">기본적으로 필요한 방명록 서비스</p>
                         <p class="card-text mb-2">JPA / SPRING / H2</p>
                         <button class="btn btn-success" th:onclick="|location.href ='@{/toy/board}'|">
                             <i class="bi bi-arrow-right-circle"></i>
@@ -45,8 +34,8 @@
                     <div>
                         <h3 class="fs-2"><i class="bi bi-image"></i> Karlo AI picture </h3>
                         <div class="mb-1 text-muted">2023-03-24 ~ 2023-03-28</div>
-                        <p>I've created several personal projects. <br> I recommend you to experience it.</p>
-                        <p class="card-text mb-2">REST API / KAKAO API</p>
+                        <p class="fw-bold">궁금해서 만들어본 AI 이미지 생성 서비스</p>
+                        <p class="card-text mb-2">REST API / Karlo API</p>
                         <button class="btn btn-success" th:onclick="|location.href ='@{/toy/karlo}'|">
                             <i class="bi bi-arrow-right-circle"></i>
                         </button>
@@ -54,16 +43,12 @@
                 </div>
                 <div class="col d-flex justify-content-center align-items-center">
                     <div>
-                        <h3 class="fs-2">
-                            <div class="spinner-border" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                            Preparing...</h3>
-                        <div class="mb-1 text-muted">(Under Development)</div>
-                        <p>I've created several personal projects. <br> I recommend you to experience it.</p>
-                        <p class="card-text mb-2">REST API / KAKAO API</p>
-                        <button class="btn btn-success" disabled>
-                            <i class="bi bi-arrow-right-circle"></i>
+                        <h3 class="fs-2"><i class="bi bi-globe"></i> Papago Service </h3>
+                        <div class="mb-1 text-muted">2023-09-24 ~ 2023-10-09</div>
+                        <p class="fw-bold">내가 필요해서 만든 Papago 번역 서비스</p>
+                        <p class="card-text mb-2">REST API / Papago API</p>
+                        <button class="btn btn-success">
+                            <i class="bi bi-arrow-right-circle" th:onclick="|location.href = '@{/toy/papago}'|"></i>
                         </button>
                     </div>
                 </div>

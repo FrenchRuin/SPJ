@@ -71,4 +71,25 @@ public class ToyProjectController {
         log.info("requested >> {}" , requested);
         return toyProjectService.getKarloImage(requested);
     }
+
+    /* Naver API Section
+    *
+    *  Papago
+    * */
+
+    @GetMapping("/toy/papago")
+    public String papago(Model model) {
+        model.addAttribute("prevPage", "/");
+        return "/toy/papago";
+    }
+
+    @PostMapping("/toy/getPapagoTranslate")
+    @ResponseBody
+    public String getPapagoTranslate(
+            @RequestParam(name = "source") String source,
+            @RequestParam(name = "target") String target
+            ,@RequestParam(name = "requested") String requested
+    ){
+        return toyProjectService.getPapago(source, target, requested);
+    }
 }

@@ -25,7 +25,7 @@ server:
   port: 9091
 
 naver:
-  papago: "https://openapi.naver.com/v1/papago/n2mt"
+  url: "https://openapi.naver.com/v1/papago/n2mt"
   id : "0QJhbYw2IhHIs78ihpxV"
   secret : "LSz5CRvuF4"
 
