@@ -22,16 +22,14 @@ public class BoardDto {
     private LocalDateTime updatedTime;
 
     // board Dto to board Entity
-    public static BoardDto boardEntityToDto(Board board){
+    public static BoardDto boardEntityToDto(Board board, User user){
 
-        User user = board.getUser();
-        UserDto userDto = UserDto.userEntityToDto(user);
 
         return BoardDto.builder()
                 .board_id(board.getBoard_id())
                 .title(board.getTitle())
-                .user(userDto)
                 .contents(board.getContents())
+                .user(UserDto.userEntityToDto(user))
                 .createdTime(board.getCreatedTime())
                 .updatedTime(board.getUpdatedTime())
                 .build();

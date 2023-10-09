@@ -1,17 +1,19 @@
 package com.example.spj.controller;
 
+import com.example.spj.dto.BoardDto;
+import com.example.spj.dto.UserDto;
 import com.example.spj.entity.Board;
 import com.example.spj.entity.User;
 import com.example.spj.service.ToyProjectService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
 
@@ -23,10 +25,13 @@ public class ToyProjectController {
     private final ToyProjectService toyProjectService;
 
     @GetMapping("/toy/board")
-    public String board(Model model, @RequestParam(value = "wrongUser", required = false , defaultValue = "true") boolean wrongUser) {
+    public String board(
+            Model model,
+            @AuthenticationPrincipal User user // Principal
+    ) {
         model.addAttribute("prevPage", "/");
         model.addAttribute("boardList", toyProjectService.findAllBoard());
-        model.addAttribute("wrongUser", wrongUser);
+        model.addAttribute("username", user.getUsername());
         return "toy/board";
     }
 
@@ -37,16 +42,8 @@ public class ToyProjectController {
     }
 
     @PostMapping("/toy/saveBoard")
-    public String addBoard(Model model, RedirectAttributes re, Board board, User user) {
-        model.addAttribute("board", board);
-        model.addAttribute("user", user);
-
-        log.info("{}",user);
-
-        User saveUser = toyProjectService.saveBoard(board, user);
-        if (saveUser != null)
-            re.addAttribute("wrongUser", true);
-
+    public String addBoard(Model model, BoardDto boardDto, UserDto userDto) {
+        toyProjectService.saveBoard(boardDto , userDto);
         return "redirect:/toy/board";
     }
 

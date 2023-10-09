@@ -38,14 +38,13 @@ public class Board {
     private LocalDateTime updatedTime;
 
     // board Entity to Dto
-    public static Board boardDtoToEntity(BoardDto boardDto){
+    public static Board boardDtoToEntity(BoardDto boardDto, UserDto userDto){
 
-        User user = User.userDtoToEntity(boardDto.getUser());
         return Board.builder()
                 .board_id(boardDto.getBoard_id())
                 .title(boardDto.getTitle())
-                .user(user)
                 .contents(boardDto.getContents())
+                .user(User.userDtoToEntity(userDto))
                 .createdTime(boardDto.getCreatedTime())
                 .updatedTime(boardDto.getUpdatedTime())
                 .build();

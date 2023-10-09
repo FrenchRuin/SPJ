@@ -40,8 +40,8 @@
                 <form method="post" th:action="@{/toy/saveBoard}">
                     <h4 class="text-muted">Write here </h4>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control " id="username" name="username"
-                               required>
+                        <input type="text" class="form-control " id="username" name="username" th:value="${username}"
+                               required readonly>
                         <label for="username">UserName</label>
                     </div>
                     <div class="form-floating mb-3">
@@ -54,15 +54,9 @@
                     </div>
                     <button class="w-100 mb-2 btn rounded-3 btn-info" type="submit">Apply</button>
                 </form>
-                <div class="alert alert-warning" role="alert" th:if="${wrongUser}">
-                    존재하지않는 USER 입니다.
-                </div>
             </div>
         </div>
     </div>
-
-
-
     <div class="modal fade " data-bs-backdrop="true"  tabindex="-1" aria-hidden="true" id="boardModal">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content rounded-4 shadow">

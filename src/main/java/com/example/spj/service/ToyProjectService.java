@@ -1,5 +1,7 @@
 package com.example.spj.service;
 
+import com.example.spj.dto.BoardDto;
+import com.example.spj.dto.UserDto;
 import com.example.spj.entity.Board;
 import com.example.spj.entity.User;
 import com.example.spj.repository.BoardRepository;
@@ -61,6 +63,17 @@ public class ToyProjectService {
             boardRepository.save(board);
         }
         return saveUser;
+    }
+
+    public void saveBoard(BoardDto boardDto , UserDto userDto) {
+        User user = userRepository.findByUsername(userDto.getUsername());
+
+        boardDto.setCreatedTime(LocalDateTime.now());
+        boardDto.setUpdatedTime(LocalDateTime.now());
+
+        UserDto saveUserDto = UserDto.userEntityToDto(user);
+        Board board = Board.boardDtoToEntity(boardDto ,saveUserDto);
+        boardRepository.save(board);
     }
 
     public Optional<Board> findBoard(Long boardId) {
